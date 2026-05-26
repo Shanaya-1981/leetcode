@@ -4,15 +4,18 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        set_nums = set(nums)
-        longest = 0
-        for current_no in set_nums:
-            length = 1
-            next_no = current_no + 1
-            previous_no = current_no - 1
-            if previous_no not in set_nums:
-                while next_no in set_nums:
-                    length += 1
+        known_no = set(nums)
+        length_seq = 0
+        max_length = 0
+        for number in known_no:
+            start_no = number - 1
+            # print(f"start no is {start_no}")
+            if start_no not in known_no:
+                length_seq = 1
+                next_no = number + 1
+                # print(f"next no is {next_no}")
+                while next_no in known_no:
                     next_no += 1
-                longest = max(longest, length)
-        return longest
+                    length_seq += 1
+                max_length = max(max_length, length_seq)
+        return max_length
