@@ -5,14 +5,14 @@ class Solution(object):
         :rtype: int
         """
         set_nums = set(nums)
-        longest = 0
-        for current_no in set_nums:
-            length = 1
-            next_no = current_no + 1
-            previous_no = current_no - 1
+        longest_pair = 0
+        for no in set_nums:
+            previous_no = no -1
+            next_no = no + 1
+            current_pair_length = 1
             if previous_no not in set_nums:
                 while next_no in set_nums:
-                    length += 1
                     next_no += 1
-                longest = max(longest, length)
-        return longest
+                    current_pair_length +=1
+                longest_pair = max(current_pair_length, longest_pair)
+        return longest_pair
