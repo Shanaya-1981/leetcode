@@ -4,30 +4,24 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
+        size_of_nums = len(nums)
+        left = [1] * size_of_nums
+        right = [1] * size_of_nums
 
-        # Create left list with same length as nums
-        left = [1] * len(nums)
-
-        # Loop starting from index 1 (index 0 stays 1, nothing to its left)
         left[0] = 1
-        for i in range(1, len(nums)):
-
-            # Each position = previous left value × previous nums value
-            left[i] = left[i-1] * nums[i - 1]
-            # print(left)
-
-        #Create right list which should have length similar to the nums
-        right = [1] * len(nums)
+        for left_array in range(1, len(nums)):
+            left[left_array] = left[left_array-1] * nums[left_array-1]
 
         right[-1] = 1
-        for i in range(len(nums) - 2, -1, -1):
-            right[i] = right[i + 1] * nums[i + 1]
-            # print(right)
+        for right_array in range(len(nums)-2, -1, -1):
+            right[right_array] = right[right_array + 1] * nums[right_array + 1]
+        # print(right)
+
+        result = [left[i] * right[i] for i in range(size_of_nums)]
+        # print(result)
+
+        # print(left)
 
 
-        #then we multiply both left and right and return result
-        result = []
-        for i in range(len(nums)):
-            result.append(left[i] * right[i])
         return result
-    
+
